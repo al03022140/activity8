@@ -28,7 +28,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        
+
                         @if($users->isEmpty())
                         <div class="text-center py-8 text-gray-500">
                             No users found.

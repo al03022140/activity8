@@ -16,7 +16,7 @@ public function up(): void
         $table->string('name', 100);
         $table->string('email', 150)->unique();
         $table->string('password', 255);
-        $table->enum('role', ['admin', 'editor', 'viewer'])->default('viewer');
+    $table->enum('role', ['Administrator', 'Teacher', 'Student'])->default('Student');
         $table->timestamps();
     });
 }
