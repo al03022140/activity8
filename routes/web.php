@@ -1,13 +1,7 @@
-use App\Http\Controllers\TestController;
-// TestController routes for courses
-Route::get('/courses', [TestController::class, 'index']); // Get all courses
-Route::post('/courses', [TestController::class, 'create']); // Create a course
-Route::get('/courses/{id}', [TestController::class, 'read']); // Get one course
-Route::put('/courses/{id}', [TestController::class, 'update']); // Update a course
-Route::delete('/courses/{id}', [TestController::class, 'delete']); // Delete a course
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,5 +21,12 @@ Route::middleware('auth')->group(function () {
     // Ruta para mostrar usuarios (solo usuarios autenticados pueden ver)
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
 });
+
+// TestController routes for courses
+Route::get('/courses', [TestController::class, 'index']); // Get all courses
+Route::post('/courses', [TestController::class, 'create']); // Create a course
+Route::get('/courses/{id}', [TestController::class, 'read']); // Get one course
+Route::put('/courses/{id}', [TestController::class, 'update']); // Update a course
+Route::delete('/courses/{id}', [TestController::class, 'delete']); // Delete a course
 
 require __DIR__.'/auth.php';
