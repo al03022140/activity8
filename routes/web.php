@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\TestController;
+use App\Http\Controllers\RoboticsKitController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,16 +17,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    // Ruta para mostrar usuarios (solo usuarios autenticados pueden ver)
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
 });
 
-// TestController routes for courses
-Route::get('/courses', [TestController::class, 'index']); // Get all courses
-Route::post('/courses', [TestController::class, 'create']); // Create a course
-Route::get('/courses/{id}', [TestController::class, 'read']); // Get one course
-Route::put('/courses/{id}', [TestController::class, 'update']); // Update a course
-Route::delete('/courses/{id}', [TestController::class, 'delete']); // Delete a course
+// Register full resource routes for robotics so index/create/store/show/edit/update/destroy are available
+Route::resource('robotics', RoboticsKitController::class);
+
+// Register full resource routes for users
+Route::resource('users', UserController::class);
 
 require __DIR__.'/auth.php';

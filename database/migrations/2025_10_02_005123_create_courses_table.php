@@ -8,19 +8,20 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('courses', function (Blueprint $table) {
-            if (!Schema::hasColumn('courses', 'robotics_kit_id')) {
-                $table->foreignId('robotics_kit_id')->nullable()->constrained('robotics_kits')->nullOnDelete();
-            }
+        Schema::create('courses', function (Blueprint $table) {
+            $table->id();
+            $table->string('code')->unique();
+            $table->string('name');
+            $table->text('description')->nullable();
+            $table->unsignedTinyInteger('credits');
+            $table->string('semester');
+            $table->foreignId('robotics_kit_id')->nullable()->constrained('robotics_kits')->nullOnDelete();
+            $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::table('courses', function (Blueprint $table) {
-            if (Schema::hasColumn('courses', 'robotics_kit_id')) {
-                $table->dropConstrainedForeignId('robotics_kit_id');
-            }
-        });
+        Schema::dropIfExists('courses');
     }
 };
