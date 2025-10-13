@@ -9,6 +9,15 @@ class Course extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'code',
+        'name',
+        'description',
+        'credits',
+        'semester',
+        'robotics_kit_id',
+    ];
+
     public function roboticsKit()
     {
         return $this->belongsTo(RoboticsKit::class);

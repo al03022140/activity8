@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoboticsKitController;
 use App\Http\Controllers\UserController;
@@ -21,6 +22,9 @@ Route::middleware('auth')->group(function () {
 
 // Register full resource routes for robotics so index/create/store/show/edit/update/destroy are available
 Route::resource('robotics', RoboticsKitController::class);
+
+// Register full resource routes for courses
+Route::resource('courses', CourseController::class);
 
 // Register full resource routes for users
 Route::resource('users', UserController::class);
