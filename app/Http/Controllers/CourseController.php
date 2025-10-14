@@ -13,6 +13,10 @@ class CourseController extends Controller
      */
     public function index()
     {
+        if(auth()->user()->role !== "Student"){
+            abort(403, "You're not authorized to view this content.");
+        }
+
         $courses = Course::with('roboticsKit')->get();
         return view('courses.index', compact('courses'));
     }
@@ -22,6 +26,10 @@ class CourseController extends Controller
      */
     public function create()
     {
+        if(auth()->user()->role !== "Student"){
+            abort(403, "You're not authorized to view this content.");
+        }
+
         $roboticsKits = RoboticsKit::all();
         return view('courses.create', compact('roboticsKits'));
     }
@@ -31,6 +39,10 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
+        if(auth()->user()->role !== "Student"){
+            abort(403, "You're not authorized to view this content.");
+        }
+
         $validated = $request->validate([
             'code' => 'required|string|max:255|unique:courses,code',
             'name' => 'required|string|max:255',
@@ -59,6 +71,10 @@ class CourseController extends Controller
      */
     public function edit(string $id)
     {
+        if(auth()->user()->role !== "Student"){
+            abort(403, "You're not authorized to view this content.");
+        }
+
         $course = Course::findOrFail($id);
         $roboticsKits = RoboticsKit::all();
         return view('courses.edit', compact('course', 'roboticsKits'));
@@ -69,6 +85,10 @@ class CourseController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        if(auth()->user()->role !== "Student"){
+            abort(403, "You're not authorized to view this content.");
+        }
+
         $course = Course::findOrFail($id);
 
         $validated = $request->validate([
@@ -90,6 +110,10 @@ class CourseController extends Controller
      */
     public function destroy(string $id)
     {
+        if(auth()->user()->role !== "Student"){
+            abort(403, "You're not authorized to view this content.");
+        }
+
         $course = Course::findOrFail($id);
         $course->delete();
 

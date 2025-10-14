@@ -12,6 +12,10 @@ class RoboticsKitController extends Controller
      */
     public function index()
     {
+        if(auth()->user()->role !== "Student"){
+            abort(403, "You're not authorized to view this content.");
+        }
+
         $kits = RoboticsKit::all();
         return view('robotics.index', compact('kits'));
     }
@@ -21,6 +25,10 @@ class RoboticsKitController extends Controller
      */
     public function create()
     {
+        if(auth()->user()->role !== "Student"){
+            abort(403, "You're not authorized to view this content.");
+        }
+
         return view('robotics.create');
     }
 
@@ -29,6 +37,10 @@ class RoboticsKitController extends Controller
      */
     public function store(Request $request)
     {
+        if(auth()->user()->role !== "Student"){
+            abort(403, "You're not authorized to view this content.");
+        }
+
         RoboticsKit::create([
             'name' => $request->name,
         ]);
@@ -50,6 +62,10 @@ class RoboticsKitController extends Controller
      */
     public function edit(string $id)
     {
+        if(auth()->user()->role !== "Student"){
+            abort(403, "You're not authorized to view this content.");
+        }
+
         $kit = RoboticsKit::find($id);
         return view('robotics.edit', compact('kit'));
     }
@@ -59,6 +75,10 @@ class RoboticsKitController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        if(auth()->user()->role !== "Student"){
+            abort(403, "You're not authorized to view this content.");
+        }
+
         $kit = RoboticsKit::find($id);
 
         $kit->update([
@@ -73,6 +93,10 @@ class RoboticsKitController extends Controller
      */
     public function destroy(string $id)
     {
+        if(auth()->user()->role !== "Student"){
+            abort(403, "You're not authorized to view this content.");
+        }
+
         $kit = RoboticsKit::find($id);
         $kit->delete();
         return redirect()->route('robotics.index');
